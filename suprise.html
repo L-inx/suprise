@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For You — A Little Bouquet</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-top:#fff0f8;
+      --bg-bottom:#ffffff;
+      --card:#fff;
+      --accent:#ff6b9a;
+      --muted:#9b6b77;
+      --shadow: 0 14px 40px rgba(91,24,66,0.12);
+      --rose:#ff6b9a;
+      --leaf:#6b8b6b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(circle at 15% 10%, #fff0f6 0%, #fff6fb 25%, #fff 60%), linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color:#3b2b2b;
+    }
+
+    .card{
+      width:100%;
+      max-width:460px;
+      background: linear-gradient(180deg,#ffffff,#fff6fb);
+      border-radius:20px;
+      padding:26px;
+      text-align:center;
+      box-shadow:var(--shadow);
+      border: 1px solid rgba(255,200,220,0.6);
+      position:relative;
+      overflow:visible;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    header h1{
+      margin:0;
+      font-size:20px;
+      font-weight:600;
+    }
+
+    .bouquet{
+      width:260px;
+      height:320px;
+      margin:0 auto;
+      cursor:pointer;
+      touch-action:manipulation;
+      display:block;
+      transition:transform .28s cubic-bezier(.2,.9,.3,1),filter .2s;
+      filter: drop-shadow(0 8px 20px rgba(255,110,160,0.18));
+    }
+    .bouquet:active{transform:translateY(6px) scale(.98)}
+    .bouquet:hover{transform:translateY(-6px) rotate(-1deg); filter: drop-shadow(0 14px 28px rgba(255,110,160,0.28));}
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+      background:linear-gradient(180deg, rgba(17,12,15,0.18), rgba(255,255,255,0.02));
+      z-index:60;
+    }
+    .note{
+      width:100%;
+      max-width:520px;
+      border-radius:14px;
+      padding:20px;
+      background: linear-gradient(180deg,#ffffff,#fff2f6);
+      border: 1px solid #ffd6e8;
+      box-shadow: 0 30px 60px rgba(91,24,66,0.18);
+      transform-origin:50% 0;
+      text-align:left;
+    }
+    .note h2{margin:0 0 8px;font-family:Parisienne, cursive;font-size:28px;color:#7b2f43}
+    .note p{margin:0;color:#52333c;line-height:1.6;font-size:15px;white-space:pre-wrap}
+    .note .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+    .btn{
+      appearance:none;border:0;padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer;
+    }
+    .btn.close{background:var(--accent);color:white;box-shadow:0 8px 20px rgba(255,110,160,0.22)}
+    .btn.secondary{background:transparent;border:1px solid #f1c0d0;color:#7b4a53}
+
+    footer{margin-top:14px;font-size:12px;color:#8a6f79;text-align:center}
+
+    @media (max-width:480px){
+      .bouquet{width:200px;height:240px}
+      .card{padding:18px}
+      .note{padding:16px}
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <header>
+      <h1>for you my love love/lovey</h1>
+    </header>
+
+    <!-- bouquet SVG with multiple realistic pink flowers -->
+    <svg class="bouquet" viewBox="0 0 220 320" id="bouquetBtn" role="button" tabindex="0" aria-label="Tap to open note">
+      <!-- wrapper paper -->
+      <g>
+        <path d="M40 140 C20 110, 30 70, 70 60 L150 60 C190 70,200 110,180 140 L110 250 Z" fill="#fff0f4" stroke="#ffd6e8" stroke-width="1.5" />
+        <rect x="90" y="210" width="40" height="70" rx="6" transform="rotate(-8 110 245)" fill="#ff7aa3" opacity="0.95"/>
+      </g>
+
+      <!-- stems -->
+      <g stroke="#4f7b5f" stroke-linecap="round" stroke-width="6" fill="none">
+        <path d="M110 120 C108 170,118 200,118 240"/>
+        <path d="M125 120 C130 170,120 200,120 240" stroke-width="5"/>
+      </g>
+
+      <!-- main flowers -->
+      <g transform="translate(70,60)">
+        <circle r="24" fill="#ffd1e0"/>
+        <circle r="16" fill="#ff7aa3" opacity="0.6"/>
+        <circle r="10" fill="#fff0f6" opacity="0.8"/>
+      </g>
+      <g transform="translate(120,40)">
+        <circle r="26" fill="#ffe6f2"/>
+        <circle r="18" fill="#ff7aa3" opacity="0.6"/>
+        <circle r="12" fill="#fff0f6" opacity="0.8"/>
+      </g>
+      <g transform="translate(95,85)">
+        <circle r="20" fill="#fff0f6"/>
+        <circle r="14" fill="#ff6b9a" opacity="0.6"/>
+        <circle r="8" fill="#ffe0ec" opacity="0.8"/>
+      </g>
+
+      <!-- additional pink roses -->
+      <g transform="translate(60,50)">
+        <circle r="14" fill="#ffb6c1"/>
+        <circle r="10" fill="#ff77aa" opacity="0.6"/>
+      </g>
+      <g transform="translate(140,70)">
+        <circle r="16" fill="#ffb6c1"/>
+        <circle r="12" fill="#ff77aa" opacity="0.6"/>
+      </g>
+      <g transform="translate(100,30)">
+        <circle r="12" fill="#ffc0cb"/>
+        <circle r="8" fill="#ff77aa" opacity="0.6"/>
+      </g>
+      <g transform="translate(80,100)">
+        <circle r="10" fill="#ffb6c1"/>
+        <circle r="6" fill="#ff77aa" opacity="0.6"/>
+      </g>
+    </svg>
+
+    <footer>Sent with ♥</footer>
+  </main>
+
+  <template id="noteTpl">
+    <div class="overlay" id="overlay">
+      <div class="note" role="dialog" aria-modal="true" aria-labelledby="greeting">
+        <h2 id="greeting">Hello</h2>
+        <p id="noteText">hello love love goodevening or goodmorning whatever time of day you open this i love you i wanted to take a moment to write down some of things i feel for you, as sometimes words spoken aloud just aren't enough to capture the depth of my love for you my love love. Our first date at the pres that night was so very special for me and I love the way that you yap all the time  like I really love that about you and I really love smelling your hair, it's so very addicting HAHAHA. I love your laugh, your smile, the way your eyes light up when you talk about things you love, and just being with you makes every moment brighter. I can't wait to make more memories together and to always remind you how much you mean to me, my love love/lovey.</p>
+        <div class="actions">
+          <button class="btn close" id="closeBtn">Close</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    const bouquet = document.getElementById('bouquetBtn');
+    const tpl = document.getElementById('noteTpl');
+
+    function getTimeGreeting(){
+      const now = new Date();
+      const h = now.getHours();
+      if(h < 12) return 'Good morning, my love';
+      if(h < 18) return 'Good afternoon, my love';
+      return 'Good evening, my love';
+    }
+
+    function showNote(){
+      if(document.getElementById('overlay')) return;
+      const node = tpl.content.cloneNode(true);
+      const overlay = node.getElementById('overlay');
+      const greetingEl = node.getElementById('greeting');
+      greetingEl.textContent = getTimeGreeting() + ',';
+      document.body.appendChild(node);
+      document.getElementById('closeBtn').addEventListener('click', ()=> overlay.remove());
+      overlay.addEventListener('click', e=>{ if(e.target === overlay) overlay.remove(); });
+    }
+
+    bouquet.addEventListener('click', showNote);
+    bouquet.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); bouquet.click(); }});
+  </script>
+</body>
+</html>
